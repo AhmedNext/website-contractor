@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import Link from "next/link";
 import { Header } from "@/components/header";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { meta, siteUrl } from "@/lib/seo";
 import "./globals.css";
+const geist = localFont({
+  src: "./fonts/Geist.woff2",
+  variable: "--font-geist",
+  weight: "100 900",
+  display: "swap",
+});
 export const metadata: Metadata = {
   ...meta(
     "Contractor Money Lab | Know Your Numbers Before You Bid",
@@ -20,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={geist.variable}>
       <body>
         {siteUrl && (
           <script

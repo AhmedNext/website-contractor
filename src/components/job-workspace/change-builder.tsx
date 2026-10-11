@@ -1,4 +1,5 @@
 "use client";
+import { Printer } from "lucide-react";
 import {
   blankChange,
   changeSchema,
@@ -35,8 +36,12 @@ export function ChangeBuilder() {
   return (
     <div className="workbench change-workbench">
       <div className="workspace-actions no-print">
-        <button disabled={!ready} onClick={() => window.print()}>
-          Print / save PDF
+        <button
+          className="change-print-button"
+          disabled={!ready}
+          onClick={() => window.print()}
+        >
+          <Printer size={18} aria-hidden="true" /> Print / Save PDF
         </button>
         <button
           disabled={!ready}
@@ -81,6 +86,10 @@ export function ChangeBuilder() {
       <p role="status" className="storage-note no-print">
         {message} One draft is saved at a time. Download a backup for each
         change order you want to keep.
+      </p>
+      <p className="storage-note no-print">
+        Print the customer document, or choose “Save as PDF” in your browser’s
+        print dialog. Your internal costs stay off the printed copy.
       </p>
       <fieldset disabled={!ready}>
         <legend>Change-order details</legend>
@@ -220,7 +229,11 @@ export function ChangeBuilder() {
       </p>
       <section className="change-document">
         <span className="eyebrow">
-          CHANGE ORDER / {(data.status === "Approved" && !approved ? "Approval incomplete" : data.status).toUpperCase()}
+          CHANGE ORDER /{" "}
+          {(data.status === "Approved" && !approved
+            ? "Approval incomplete"
+            : data.status
+          ).toUpperCase()}
         </span>
         <h2>{data.number || "Change order"}</h2>
         <p>
@@ -244,8 +257,7 @@ export function ChangeBuilder() {
         <p>
           This amount adds to the existing contract price. Taxes and fees are
           not added automatically; account for applicable charges before
-          approval. The internal cost breakdown above is omitted from the
-          printed document.
+          approval.
         </p>
         <p>
           <strong>Approval record:</strong>{" "}

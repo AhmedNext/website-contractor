@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import { RotateCcw, Info } from "lucide-react";
+import { RotateCcw, Info, Bookmark, Copy } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,13 +13,27 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/tooltip";
-import { calculate, cashFlow, type Values } from "@/lib/engines";
+import { calculate, cashFlow, type Values, type Metric } from "@/lib/engines";
 import { validateField } from "@/lib/validation";
 import { money, type Tool, type Field } from "@/content/tools";
-const CashChart = dynamic(() => import("./cash-chart"), {
+import {
+  calculatorPresets,
+  type CalculatorPreset,
+} from "@/content/calculator-presets";
+const CalculatorVisuals = dynamic(() => import("./calculator-visuals"), {
   ssr: false,
-  loading: () => <div className="chart">Loading cash forecast…</div>,
+  loading: () => (
+    <div className="visual-lab chart-loading">
+      Preparing your interactive chart…
+    </div>
+  ),
 });
+function formatMetric(metric: Metric) {
+  if (metric.value === null) return "Unavailable";
+  if (metric.count) return metric.value.toLocaleString("en-US");
+  if (metric.percent) return `${metric.value.toFixed(2)}%`;
+  return money(metric.value);
+}
 function initial(tool: Tool): Record<string, string> {
   const values = Object.fromEntries(
     tool.fields.map((f) => [f.key, f.initial.toLocaleString("en-US")]),
@@ -36,8 +50,12 @@ export function Calculator({ tool }: { tool: Tool }) {
     [mode, setMode] = useState("0"),
     [months, setMonths] = useState(6),
     [status, setStatus] = useState("Proposed");
+  const [pinned, setPinned] = useState<Metric | null>(null);
+  const [copyStatus, setCopyStatus] = useState("");
+  const [visualRevision, setVisualRevision] = useState(0);
+  const [presetName, setPresetName] = useState("Default example");
   const cash = tool.slug === "contractor-cash-flow-calculator";
-  const fields = [
+  const fields: Field[] = [
     ...tool.fields,
     ...(cash
       ? Array.from({ length: months }, (_, i) => [
@@ -61,7 +79,7 @@ export function Calculator({ tool }: { tool: Tool }) {
   if (
     tool.slug === "markup-vs-margin-calculator" &&
     mode === "1" &&
-    Number(raw.rate) >= 100
+    Number(raw.rate.replace(/,/g, "")) >= 100
   )
     errors.rate = "Margin must be less than 100%.";
   const invalid = Object.values(errors).some(Boolean);
@@ -76,6 +94,73 @@ export function Calculator({ tool }: { tool: Tool }) {
     setMode("0");
     setMonths(6);
     setStatus("Proposed");
+    setPinned(null);
+    setCopyStatus("");
+    setPresetName("Default example");
+    setVisualRevision((n) => n + 1);
+  };
+  const applyPreset = (preset: CalculatorPreset) => {
+    setRaw({
+      ...initial(tool),
+      ...Object.fromEntries(
+        Object.entries(preset.values).map(([key, value]) => [
+          key,
+          value.toLocaleString("en-US"),
+        ]),
+      ),
+    });
+    setMonths(6);
+    setStatus("Proposed");
+    setPresetName(preset.label);
+    setCopyStatus("");
+    setVisualRevision((n) => n + 1);
+  };
+  const copyEstimate = async () => {
+    const text = [
+      tool.name,
+      "Planning estimate — USD",
+      ...(tool.slug === "markup-vs-margin-calculator"
+        ? [`Mode: ${mode === "0" ? "Markup" : "Profit margin"}`]
+        : []),
+      ...(tool.slug === "change-order-profit-calculator"
+        ? [`Status: ${status}`]
+        : []),
+      ...(cash ? [`Forecast: ${months} months`] : []),
+      "",
+      ...fields.map(
+        (f) =>
+          `${f.label}: ${f.unit ? `${v[f.key]} ${f.unit}` : money(v[f.key])}`,
+      ),
+      "",
+      ...metrics.map((metric) => `${metric.label}: ${formatMetric(metric)}`),
+      "",
+      "Based on entered assumptions. This summary excludes the separate what-if scenario.",
+    ].join("\n");
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopyStatus("Estimate copied.");
+    } catch {
+      setCopyStatus(
+        "Copy unavailable in this browser. You can select the result text instead.",
+      );
+    }
+  };
+  const rangeFor = (f: Field) => {
+    if (errors[f.key]) return null;
+    const n = v[f.key];
+    if (f.key === "target" || (f.key === "rate" && mode === "1"))
+      return { min: 0, max: Math.max(95, n), step: 0.5 };
+    if (["rate", "burden", "retainage"].includes(f.key))
+      return {
+        min: 0,
+        max: f.key === "retainage" ? 100 : Math.max(100, n),
+        step: 1,
+      };
+    if (f.key === "paymentDelay")
+      return { min: 0, max: Math.max(6, n), step: 1 };
+    if (f.key === "billable")
+      return { min: 100, max: Math.max(3000, n), step: 25 };
+    return null;
   };
   const field = (f: Field) => (
     <div className="field" key={f.key}>
@@ -101,7 +186,11 @@ export function Calculator({ tool }: { tool: Tool }) {
           id={f.key}
           inputMode="decimal"
           value={raw[f.key]}
-          onChange={(e) => setRaw({ ...raw, [f.key]: e.target.value })}
+          onChange={(e) => {
+            setRaw({ ...raw, [f.key]: e.target.value });
+            setPresetName("");
+            setCopyStatus("");
+          }}
           onBlur={() => {
             if (!errors[f.key] && raw[f.key])
               setRaw((prev) => ({
@@ -116,6 +205,22 @@ export function Calculator({ tool }: { tool: Tool }) {
           aria-describedby={errors[f.key] ? f.key + "-error" : undefined}
         />
       </div>
+      {rangeFor(f) && (
+        <input
+          className="field-slider"
+          type="range"
+          aria-label={`Adjust ${f.label}`}
+          min={rangeFor(f)!.min}
+          max={rangeFor(f)!.max}
+          step={rangeFor(f)!.step}
+          value={v[f.key]}
+          onChange={(e) => {
+            setRaw((prev) => ({ ...prev, [f.key]: e.target.value }));
+            setPresetName("");
+            setCopyStatus("");
+          }}
+        />
+      )}
       {errors[f.key] && (
         <p id={f.key + "-error"} className="field-error">
           {errors[f.key]}
@@ -125,6 +230,31 @@ export function Calculator({ tool }: { tool: Tool }) {
   );
   return (
     <>
+      <div className="calculator-toolbar">
+        <div className="example-presets">
+          <span>TRY AN EXAMPLE</span>
+          <button
+            className={presetName === "Default example" ? "active" : ""}
+            aria-pressed={presetName === "Default example"}
+            onClick={reset}
+          >
+            Default example
+          </button>
+          {(calculatorPresets[tool.slug] ?? []).map((preset) => (
+            <button
+              key={preset.label}
+              className={presetName === preset.label ? "active" : ""}
+              aria-pressed={presetName === preset.label}
+              onClick={() => applyPreset(preset)}
+            >
+              {preset.label}
+            </button>
+          ))}
+        </div>
+        <span className="preset-note">
+          Hypothetical scenarios · Updates instantly
+        </span>
+      </div>
       <div className="mobile-result" aria-live="polite">
         <span>{invalid ? "Review your inputs" : metrics[0]?.label}</span>
         <strong>
@@ -204,17 +334,23 @@ export function Calculator({ tool }: { tool: Tool }) {
                   Project expenses and invoices remain nonnegative.
                 </p>
                 {Array.from({ length: months }, (_, i) => (
-                  <fieldset className="month-fields" key={i}>
-                    <legend>MONTH {i + 1}</legend>
-                    {fields
-                      .filter(
-                        (f) =>
-                          f.key === `invoice${i}` ||
-                          f.key === `expense${i}` ||
-                          f.key === `other${i}`,
-                      )
-                      .map(field)}
-                  </fieldset>
+                  <details className="month-editor" key={i} open={i === 0}>
+                    <summary>
+                      Month {i + 1}
+                      <span>{money(v[`invoice${i}`] || 0)} invoiced</span>
+                    </summary>
+                    <fieldset className="month-fields">
+                      <legend>MONTH {i + 1}</legend>
+                      {fields
+                        .filter(
+                          (f) =>
+                            f.key === `invoice${i}` ||
+                            f.key === `expense${i}` ||
+                            f.key === `other${i}`,
+                        )
+                        .map(field)}
+                    </fieldset>
+                  </details>
                 ))}
               </>
             )}
@@ -229,12 +365,7 @@ export function Calculator({ tool }: { tool: Tool }) {
               )}
           </CardContent>
         </Card>
-        <div
-          id="detailed-results"
-          className="results-panel"
-          aria-live="polite"
-          aria-atomic="false"
-        >
+        <div id="detailed-results" className="results-panel">
           <div className="results-heading">
             <span className="eyebrow">YOUR ESTIMATED OUTCOME</span>
             <span className="live-dot">Live calculation</span>
@@ -269,6 +400,41 @@ export function Calculator({ tool }: { tool: Tool }) {
                       : "Based on your inputs. Review the assumptions below."}
                 </p>
               </div>
+              <div className="result-actions">
+                <button onClick={() => setPinned({ ...metrics[0] })}>
+                  <Bookmark size={15} /> Pin this estimate
+                </button>
+                <button onClick={copyEstimate}>
+                  <Copy size={15} /> Copy estimate
+                </button>
+              </div>
+              {copyStatus && (
+                <p className="copy-status" role="status">
+                  {copyStatus}
+                </p>
+              )}
+              {pinned && (
+                <div className="pinned-estimate">
+                  <div>
+                    <span>Pinned {pinned.label.toLowerCase()}</span>
+                    <strong>{formatMetric(pinned)}</strong>
+                  </div>
+                  <div>
+                    <span>Change from pinned estimate</span>
+                    <strong>
+                      {pinned.value === null || metrics[0].value === null
+                        ? "Unavailable"
+                        : `${metrics[0].value - pinned.value > 0 ? "+" : ""}${formatMetric({ ...metrics[0], value: metrics[0].value - pinned.value })}`}
+                    </strong>
+                  </div>
+                  <button
+                    onClick={() => setPinned(null)}
+                    aria-label="Remove pinned estimate"
+                  >
+                    ×
+                  </button>
+                </div>
+              )}
               {(metrics[0]?.value ?? 0) < 0 && (
                 <Alert variant="destructive">
                   <AlertDescription>
@@ -287,8 +453,14 @@ export function Calculator({ tool }: { tool: Tool }) {
                     </AlertDescription>
                   </Alert>
                 )}
+              <CalculatorVisuals
+                key={`${tool.slug}-${mode}-${visualRevision}`}
+                slug={tool.slug}
+                values={v}
+                months={months}
+              />
               <div className="metrics-grid">
-                {metrics.slice(1).map((m) => (
+                {metrics.slice(1, 5).map((m) => (
                   <div className="metric" key={m.label}>
                     <span>{m.label}</span>
                     <strong className={(m.value ?? 0) < 0 ? "negative" : ""}>
@@ -303,51 +475,70 @@ export function Calculator({ tool }: { tool: Tool }) {
                   </div>
                 ))}
               </div>
+              {metrics.length > 5 && (
+                <details className="extra-metrics">
+                  <summary>More details from your estimate</summary>
+                  <div className="metrics-grid">
+                    {metrics.slice(5).map((metric) => (
+                      <div className="metric" key={metric.label}>
+                        <span>{metric.label}</span>
+                        <strong
+                          className={(metric.value ?? 0) < 0 ? "negative" : ""}
+                        >
+                          {formatMetric(metric)}
+                        </strong>
+                      </div>
+                    ))}
+                  </div>
+                </details>
+              )}
               {forecast && (
                 <>
-                  <CashChart rows={forecast.rows} />
-                  <div
-                    className="table-scroll"
-                    tabIndex={0}
-                    role="region"
-                    aria-label="Monthly cash forecast"
-                  >
-                    <table>
-                      <caption>Monthly cash forecast — USD</caption>
-                      <thead>
-                        <tr>
-                          {[
-                            "Month",
-                            "Opening",
-                            "Received",
-                            "Paid",
-                            "Net",
-                            "Closing",
-                            "Receivables",
-                          ].map((h) => (
-                            <th key={h}>{h}</th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {forecast.rows.map((r) => (
-                          <tr key={r.month}>
-                            <th scope="row">{r.month}</th>
+                  <details className="forecast-details">
+                    <summary>View the monthly cash forecast</summary>
+                    <div
+                      className="table-scroll"
+                      tabIndex={0}
+                      role="region"
+                      aria-label="Monthly cash forecast"
+                    >
+                      <table>
+                        <caption>Monthly cash forecast — USD</caption>
+                        <thead>
+                          <tr>
                             {[
-                              r.opening,
-                              r.received,
-                              r.paid,
-                              r.net,
-                              r.closing,
-                              r.receivables,
-                            ].map((n, i) => (
-                              <td key={i}>{money(n)}</td>
+                              "Month",
+                              "Opening",
+                              "Received",
+                              "Paid",
+                              "Net",
+                              "Closing",
+                              "Receivables",
+                            ].map((h) => (
+                              <th key={h}>{h}</th>
                             ))}
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                        </thead>
+                        <tbody>
+                          {forecast.rows.map((r) => (
+                            <tr key={r.month}>
+                              <th scope="row">{r.month}</th>
+                              {[
+                                r.opening,
+                                r.received,
+                                r.paid,
+                                r.net,
+                                r.closing,
+                                r.receivables,
+                              ].map((n, i) => (
+                                <td key={i}>{money(n)}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </details>
                   <div className="assumption-box">
                     <strong>Payment-delay sensitivity</strong>
                     <p>

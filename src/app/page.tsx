@@ -2,6 +2,7 @@ import { WorkspaceLinks } from "@/components/workspace-links";
 import Link from "next/link";
 import { ArrowRight, Check, ArrowUpRight } from "lucide-react";
 import { ToolGrid } from "@/components/tool-grid";
+import { EditorialPhoto } from "@/components/editorial-photo";
 export default function Home() {
   return (
     <>
@@ -41,47 +42,35 @@ export default function Home() {
             </span>
           </div>
         </div>
-        <div className="estimate-card">
-          <div className="estimate-head">
-            <span>THE NUMBERS BEHIND THE JOB</span>
-            <span className="example-tag">Hypothetical example</span>
-          </div>
-          <div className="estimate-project">
-            <span>Residential renovation</span>
-            <small>ESTIMATE / 001</small>
-          </div>
-          <div className="estimate-line">
-            <span>Contract revenue</span>
-            <strong>$55,000</strong>
-          </div>
-          <div className="estimate-line">
-            <span>Direct job costs</span>
-            <strong>$35,000</strong>
-          </div>
-          <div className="estimate-line">
-            <span>Overhead + contingency expense</span>
-            <strong>$6,500</strong>
-          </div>
-          <div className="estimate-result">
+        <div className="hero-visual">
+          <EditorialPhoto
+            photo="contractor-estimate"
+            alt="Contractor reviewing an estimate and plans at a renovation workbench"
+            eager
+          />
+          <span className="photo-kicker">ON SITE. ON BUDGET.</span>
+          <Link
+            className="hero-profit-note"
+            href="/tools/job-profit-calculator"
+          >
             <div>
-              <span>Estimated job profit</span>
+              <span className="eyebrow">
+                A CLEARER PICTURE OF YOUR NEXT JOB
+              </span>
               <strong>
-                $13,500<span>24.55% margin</span>
+                $13,500 <small>estimated profit</small>
               </strong>
+              <p>$55,000 revenue − $41,500 costs · Hypothetical example</p>
             </div>
-            <div className="mini-bars">
-              <i />
-              <i />
-              <i />
-              <i />
-            </div>
-          </div>
-          <Link href="/tools/job-profit-calculator">
-            What does your next job look like? <ArrowRight size={17} />
+            <span className="photo-link-arrow">
+              <ArrowUpRight size={23} />
+            </span>
           </Link>
         </div>
       </section>
-      <div className="container"><WorkspaceLinks /></div>
+      <div className="container">
+        <WorkspaceLinks />
+      </div>
       <div className="principle-strip">
         <div className="container">
           <span>BUILT FOR U.S. CONTRACTORS</span>
@@ -92,23 +81,35 @@ export default function Home() {
         </div>
       </div>
       <section className="container section">
-        <div className="section-heading">
+        <div className="section-heading toolbox-heading">
           <div>
             <span className="eyebrow">YOUR FINANCIAL TOOLBOX</span>
             <h2>Measure twice. Bid once.</h2>
           </div>
-          <p>
-            From the first estimate to the final change order,
-            <br />
-            make the math work for you.
-          </p>
+          <EditorialPhoto
+            photo="plans-and-tools"
+            alt="Plans, a calculator and well-used tools on a jobsite workbench"
+            className="toolbox-photo"
+          />
         </div>
         <ToolGrid />
       </section>
       <section className="education">
         <div className="container section">
-          <span className="eyebrow">THE FUNDAMENTALS</span>
-          <h2>Three distinctions that change the numbers.</h2>
+          <div className="fundamentals-heading">
+            <div>
+              <span className="eyebrow">THE FUNDAMENTALS</span>
+              <h2>Good decisions start before the work does.</h2>
+              <p>
+                Three distinctions that change the numbers, from the first bid
+                to the last invoice.
+              </p>
+            </div>
+            <EditorialPhoto
+              photo="framing-crew"
+              alt="Two carpenters discussing a plan inside a timber-framed house"
+            />
+          </div>
           <div className="concept-grid">
             {[
               [

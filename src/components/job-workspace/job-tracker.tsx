@@ -204,7 +204,12 @@ export function JobTracker() {
         cash collected. Enter expenses incurred, including unpaid bills. Include
         owner labor and overhead once.
       </p>
-      <div className="workspace-table-wrap">
+      <div
+        className="workspace-table-wrap"
+        tabIndex={0}
+        role="region"
+        aria-label="Job costs — scroll to compare estimated and actual costs"
+      >
         <table className="workspace-table">
           <caption>Costs for {job.name || "Untitled job"}</caption>
           <thead>

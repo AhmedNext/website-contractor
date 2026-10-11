@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { pages } from "@/content/pages";
 import { meta } from "@/lib/seo";
+import { EditorialPhoto } from "@/components/editorial-photo";
 export function generateStaticParams() {
   return Object.keys(pages).map((page) => ({ page }));
 }
@@ -32,6 +33,13 @@ export default async function Page({
       <span className="eyebrow">CONTRACTOR MONEY LAB</span>
       <h1>{p.title}</h1>
       <p className="intro">{p.description}</p>
+      {page === "about" && (
+        <EditorialPhoto
+          photo="framing-crew"
+          alt="Carpenters reviewing the next stage of a residential project"
+          className="about-photo"
+        />
+      )}
       {p.sections.map(([title, body]) => (
         <section key={title}>
           <h2>{title}</h2>

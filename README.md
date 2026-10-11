@@ -21,15 +21,23 @@ npm run dev
 ```text
 src/app/                     pages, metadata, sitemap, and robots
 src/components/ui/           shadcn/ui components
-src/components/calculators/  shared calculator UI and cash-flow chart
+src/components/calculators/  shared calculator UI and interactive charts
 src/components/ads/          disabled-by-default advertising integration
 src/content/                 calculator definitions and editorial content
 src/lib/                     calculation engines, validation, SEO, and utilities
-public/                      social preview image
+public/                      social preview and responsive editorial images
 scripts/                     static preview and export compatibility helper
 ```
 
 The website includes six calculators: job profit, break-even, cash flow, labor rates, markup vs. margin, and change-order profit. About, methodology, contact, privacy, terms, and a custom 404 are included. Test suites, QA artifacts, and their dependencies have been removed at the owner's request.
+
+Every calculator includes a live chart, an independent what-if scenario, hypothetical presets, a pinned result for comparison, and a copyable estimate summary. Exact chart values are available as tables. Pinned estimates and comparisons remain in page memory and clear on reload. Scenario adjustments do not change the main estimate inputs and are excluded from the copied estimate.
+
+## Photography
+
+The homepage, toolbox, and about page use three original AI-generated editorial illustrations, not photographs of customers or staff. Responsive 768px and 1536px WebP assets at quality 92 live in `public/images/`. The hero loads eagerly and its responsive sizing accounts for cropping; supporting photos load lazily. The [asset notes and generation prompts](public/images/README.md) document each source. Generated originals remain outside the repository; only compressed web assets are shipped.
+
+Geist is self-hosted through `next/font/local`, with tabular numerals throughout the site. Its SIL Open Font License is included in `src/app/fonts/OFL.txt`; the source is [Vercel's official font repository](https://github.com/vercel/geist-font). Job costs have sticky category and column headings in the scrollable mobile table. The change-order builder's Print / Save PDF button opens the browser print dialog with a customer document layout, signature lines, and no internal costs.
 
 ## Deployment
 
