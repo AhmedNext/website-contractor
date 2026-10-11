@@ -1,5 +1,5 @@
 {
-  "name": "website",
+  "name": "contractor-money-lab",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,8 +7,6 @@
     "build": "next build --webpack",
     "start": "node scripts/serve.mjs",
     "lint": "eslint",
-    "test": "vitest run",
-    "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
     "preview": "node scripts/serve.mjs",
     "postbuild": "node scripts/finalize-export.mjs"
@@ -26,19 +24,14 @@
     "zod": "^4.6.6"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.13.0",
-    "@playwright/test": "^1.64.0",
     "@tailwindcss/postcss": "^4.3.3",
-    "@tailwindcss/turbopack": "^4",
     "@types/node": "^24.19.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
     "postcss": "^8.5.29",
-    "prettier": "^3.9.10",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "vitest": "^5.0.3"
+    "typescript": "^5"
   }
 }
