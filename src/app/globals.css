@@ -1331,3 +1331,277 @@ thead {
 [data-slot="tabs-trigger"] {
   color: #505b4c;
 }
+
+/* Job records and customer documents. */
+.workspace-links {
+  margin: 35px 0 50px;
+  padding: 28px;
+  border: 1px solid #c9cfc2;
+  border-radius: 8px;
+  background: #edf0e7;
+}
+.workspace-links h2,
+.workspace-scenario h2 {
+  font-size: 28px;
+  margin: 8px 0;
+}
+.workspace-link-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+.workspace-link-grid a {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #c9cfc2;
+  border-radius: 6px;
+}
+.workspace-link-grid h3 {
+  font-size: 19px;
+  margin-bottom: 10px;
+}
+.workbench {
+  margin-top: 28px;
+}
+.workspace-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: end;
+}
+.workbench button,
+.import-control {
+  padding: 10px 14px;
+  border: 1px solid #65715b;
+  border-radius: 5px;
+  background: #fff;
+  min-height: 44px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.workbench button:hover {
+  background: #edf0e7;
+}
+.workbench button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.workbench label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.workbench input:not([type="checkbox"]),
+.workbench select,
+.workbench textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 9px;
+  border: 1px solid #85907c;
+  background: #fff;
+  color: #28382d;
+  border-radius: 4px;
+  font-weight: 400;
+}
+.workbench input:focus-visible,
+.workbench select:focus-visible,
+.workbench textarea:focus-visible,
+.workbench button:focus-visible {
+  outline: 3px solid #b9532e;
+  outline-offset: 2px;
+}
+.workbench .import-control input {
+  max-width: 230px;
+  font-size: 12px;
+}
+.storage-note {
+  font-size: 13px;
+  margin: 16px 0;
+  color: #505b4c;
+}
+.workbench fieldset {
+  margin: 24px 0;
+  padding: 20px;
+  border: 1px solid #c9cfc2;
+  border-radius: 6px;
+}
+.workbench legend {
+  font-weight: 700;
+  padding: 0 8px;
+}
+.workspace-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 15px 0 20px;
+}
+.workbench .check-label {
+  flex-direction: row;
+  align-items: center;
+}
+.check-label input {
+  width: 20px;
+  height: 20px;
+}
+.workspace-table-wrap {
+  overflow-x: auto;
+  margin: 24px 0;
+}
+.workspace-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 610px;
+  text-align: left;
+}
+.workspace-table caption {
+  text-align: left;
+  font-weight: 700;
+  padding-bottom: 14px;
+}
+.workspace-table th,
+.workspace-table td {
+  padding: 12px;
+  border-bottom: 1px solid #c9cfc2;
+}
+.workspace-table thead {
+  background: #edf0e7;
+}
+.workspace-table input {
+  min-width: 100px;
+}
+.cost-warning {
+  color: #a23920;
+  font-weight: 700;
+}
+.workspace-results {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.workspace-results article {
+  background: #28382d;
+  color: #fff;
+  padding: 22px;
+  border-radius: 6px;
+}
+.workspace-results span,
+.workspace-results small {
+  display: block;
+}
+.workspace-results strong {
+  display: block;
+  font-size: 30px;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+.workspace-results small {
+  color: #e2e8da;
+}
+.workspace-notice {
+  padding: 18px;
+  border-left: 4px solid #b9532e;
+  background: #f6ede3;
+}
+.workspace-scenario {
+  margin: 30px 0;
+  padding: 24px;
+  background: #edf0e7;
+  border-radius: 6px;
+}
+.workspace-scenario label {
+  max-width: 240px;
+  margin: 16px 0;
+}
+.change-document {
+  background: #fff;
+  border: 1px solid #c9cfc2;
+  padding: 35px;
+  margin: 30px 0;
+}
+.change-document h2 {
+  font-size: 30px;
+  margin: 15px 0;
+}
+.change-document h3 {
+  margin: 22px 0 10px;
+  font-size: 20px;
+}
+.change-document p {
+  margin-bottom: 18px;
+  overflow-wrap: anywhere;
+}
+.preserve-lines {
+  white-space: pre-wrap;
+}
+.signature-lines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 45px;
+}
+.danger-action {
+  color: #a23920;
+}
+@media (max-width: 700px) {
+  .workspace-fields,
+  .workspace-results,
+  .workspace-link-grid {
+    grid-template-columns: 1fr;
+  }
+  .workspace-links,
+  .change-document {
+    padding: 20px;
+  }
+  .workspace-actions > * {
+    max-width: 100%;
+  }
+}
+@media print {
+  .site-header,
+  .footer,
+  .no-print,
+  .change-workbench > fieldset,
+  .change-workbench > p {
+    display: none !important;
+  }
+  .workspace-page {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+  .workspace-page h1 {
+    font-size: 24px;
+  }
+  .change-document {
+    border: 0;
+    padding: 0;
+  }
+  .workspace-results article {
+    background: white;
+    color: black;
+    border: 1px solid #999;
+  }
+  .workspace-results small {
+    color: black;
+  }
+  .workspace-table {
+    min-width: 0;
+  }
+  .workspace-table th,
+  .workspace-table td {
+    padding: 6px;
+  }
+  .workspace-table input {
+    min-width: 0;
+    width: 100%;
+    border: 0 !important;
+  }
+  .workspace-results,
+  tr {
+    break-inside: avoid;
+  }
+}

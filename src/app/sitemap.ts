@@ -8,6 +8,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ? [
         "/",
         "/tools/",
+        "/tools/job-cost-tracker/",
+        "/tools/change-order-builder/",
         ...Object.keys(pages).map((p) => "/" + p + "/"),
         ...tools.map((t) => "/tools/" + t.slug + "/"),
       ].map((p) => ({ url: siteUrl + p }))

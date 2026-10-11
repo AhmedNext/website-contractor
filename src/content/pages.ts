@@ -67,11 +67,11 @@ export const pages: Record<
     sections: [
       [
         "Financial inputs",
-        "Calculator values remain in your browser’s page memory. They are not submitted to a backend, stored in a database, or serialized into shared URLs. Reloading clears them. No account is required.",
+        "Calculator values remain in your browser’s page memory. They are not submitted to a backend, stored in a database, or serialized into shared URLs. Reloading clears the original calculator inputs. The job tracker and change-order builder save the records you enter in this browser’s local storage and offer downloadable backups. Those records are not sent to a backend. No account is required.",
       ],
       [
         "Cookies and storage",
-        "The delivered site uses no analytics or advertising scripts and does not store financial inputs in localStorage. Your hosting provider may process standard request data such as IP address and browser information to deliver and secure the site.",
+        "The delivered site uses no analytics or advertising scripts and stores job tracker records and a change-order draft in localStorage on your device. Clearing browser storage deletes these records; use downloaded backups to keep or move them. Shared devices can expose saved records to other people using the same browser. Your hosting provider may process standard request data such as IP address and browser information to deliver and secure the site.",
       ],
       [
         "Future advertising and analytics",

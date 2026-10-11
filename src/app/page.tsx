@@ -1,3 +1,4 @@
+import { WorkspaceLinks } from "@/components/workspace-links";
 import Link from "next/link";
 import { ArrowRight, Check, ArrowUpRight } from "lucide-react";
 import { ToolGrid } from "@/components/tool-grid";
@@ -80,6 +81,7 @@ export default function Home() {
           </Link>
         </div>
       </section>
+      <div className="container"><WorkspaceLinks /></div>
       <div className="principle-strip">
         <div className="container">
           <span>BUILT FOR U.S. CONTRACTORS</span>

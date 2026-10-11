@@ -54,5 +54,5 @@ Copy `.env.example` to `.env.local` if needed. Never commit secrets.
 - Advertising is disabled. Before enabling it, configure the actual publisher and slot, connect `AdSlot.consentGranted` to an appropriate consent platform, and update the privacy policy. The enable flag alone does not grant consent.
 - Analytics is optional and not active. Configure it through the hosting provider if needed and update the privacy policy.
 
-Financial inputs remain in page memory and are not sent to a server or saved. All example values are hypothetical. See the methodology page for formulas and assumptions.
+Calculator inputs remain in page memory. The job tracker and change-order builder save records in browser localStorage, with JSON backup/restore and printable reports. Records are not sent to a server or synced between domains/devices. All example values are hypothetical. See the methodology page for formulas and assumptions.
 
