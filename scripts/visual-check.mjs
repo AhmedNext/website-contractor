@@ -1,0 +1,10 @@
+import { chromium } from "@playwright/test";
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 375, height: 900 } });
+await p.goto("http://localhost:4173/tools/job-profit-calculator/");
+await p.screenshot({ path: "qa/mobile-first-screen.png" });
+await p.setViewportSize({ width: 1280, height: 900 });
+await p.goto("http://localhost:4173/tools/contractor-cash-flow-calculator/");
+await p.locator(".recharts-surface").waitFor();
+await p.locator(".results-panel").screenshot({ path: "qa/cash-results.png" });
+await b.close();
