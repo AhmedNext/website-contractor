@@ -2,6 +2,7 @@ import { WorkspaceLinks } from "@/components/workspace-links";
 import { ToolGrid } from "@/components/tool-grid";
 import { meta } from "@/lib/seo";
 import { EditorialPhoto } from "@/components/editorial-photo";
+import { TradeLinks } from "@/components/trade-links";
 export const metadata = meta(
   "Free Contractor Financial Calculators",
   "Free job tracking, printable change orders, and six calculators to estimate job profit, forecast cash flow, set labor rates, compare markup and margin, and assess change orders.",
@@ -32,6 +33,7 @@ export default function Tools() {
       </div>
       <WorkspaceLinks />
       <ToolGrid />
+      <TradeLinks />
     </div>
   );
 }

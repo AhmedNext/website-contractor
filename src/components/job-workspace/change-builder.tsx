@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { Printer } from "lucide-react";
 import {
   blankChange,
@@ -9,7 +10,8 @@ import {
   type Change,
 } from "@/lib/job-workspace";
 import { useLocalDraft, MoneyInput } from "./storage";
-export function ChangeBuilder() {
+export function ChangeBuilder({ example }: { example?: Partial<Change> } = {}) {
+  const [confirmExample, setConfirmExample] = useState(false);
   const { data, setData, ready, message, setMessage } = useLocalDraft(
     "cml-change-v1",
     changeSchema,
@@ -36,6 +38,9 @@ export function ChangeBuilder() {
   return (
     <div className="workbench change-workbench">
       <div className="workspace-actions no-print">
+        {example && (
+          <button disabled={!ready} aria-expanded={confirmExample} aria-controls="example-confirmation" onClick={() => setConfirmExample(true)}>Load remodeling example</button>
+        )}
         <button
           className="change-print-button"
           disabled={!ready}
@@ -83,6 +88,17 @@ export function ChangeBuilder() {
           New change order
         </button>
       </div>
+      {example && confirmExample && <div id="example-confirmation" className="example-confirmation no-print" role="region" aria-label="Confirm example replacement">
+        <p>Replace your current draft with the hypothetical remodeling example? Download a backup first to keep your draft.</p>
+        <div className="workspace-actions">
+          <button onClick={() => {
+            setData({ ...blankChange, ...example, date: new Date().toLocaleDateString("en-CA") });
+            setMessage("Hypothetical example loaded. Replace the sample details before sending.");
+            setConfirmExample(false);
+          }}>Replace draft with example</button>
+          <button onClick={() => setConfirmExample(false)}>Keep current draft</button>
+        </div>
+      </div>}
       <p role="status" className="storage-note no-print">
         {message} One draft is saved at a time. Download a backup for each
         change order you want to keep.

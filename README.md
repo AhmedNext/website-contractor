@@ -64,3 +64,25 @@ Copy `.env.example` to `.env.local` if needed. Never commit secrets.
 
 Calculator inputs remain in page memory. The job tracker and change-order builder save records in browser localStorage, with JSON backup/restore and printable reports. Records are not sent to a server or synced between domains/devices. All example values are hypothetical. See the methodology page for formulas and assumptions.
 
+
+## Editorial content and specialist tools
+
+The six calculator pages include server-rendered guides, worked examples and native HTML FAQs (roughly 950–1,000 words per guide including the formula/example). Factual benchmarks cite NAHB; employer payroll-rate discussion cites IRS. The text separates project margins from company net profit. Examples are hypothetical, not local price surveys or promised results.
+
+Three specialist routes reuse the calculation engines with tailored defaults and distinct guides:
+
+- `/tools/roofing-job-profit-calculator/`
+- `/tools/plumbing-labor-rate-calculator/`
+- `/tools/remodeling-change-order-template/`
+
+The remodeling example must be loaded explicitly with confirmation. It uses the existing single change-order browser draft; loading an example can replace that draft. The homepage and toolbox link to these pages, and the sitemap lists each canonical URL. FAQ answers are present in the exported HTML; no unsupported FAQ rich-result eligibility is claimed. An Apple touch icon is included.
+
+## Canonical domain redirect (Cloudflare account setting)
+
+The preferred hostname is `contractormoneylab.website`. Canonical tags already use it, but they do not replace an HTTP redirect. Cloudflare Pages `_redirects` does not support domain-level source matching; adding a catch-all path redirect would risk redirecting the preferred hostname into itself.
+
+Follow [Cloudflare's www-to-apex instructions](https://developers.cloudflare.com/pages/how-to/www-redirect/): create and enable a Bulk Redirect list/rule with source `www.contractormoneylab.website`, target `https://contractormoneylab.website`, status **301**, subpath matching, preserve path suffix and preserve query string. Configure a proxied DNS `A` record for `www` to `192.0.2.1` as described in that guide, replacing a parking record if present. Keep the root Pages record intact. Enable Always Use HTTPS in the zone if HTTP does not already redirect.
+
+Alternatively, in the domain's **Rules > Redirect Rules**, use the **Redirect from WWW to root** Single Redirect template. Set the wildcard request URL to `https://www.contractormoneylab.website/*`, target URL to `https://contractormoneylab.website/${1}`, status 301, and preserve query string. This narrower wildcard rule preserves the path and applies only to HTTPS requests for the www hostname. The www DNS record must be proxied. [Cloudflare's migration guide](https://developers.cloudflare.com/rules/reference/page-rules-migration/) documents this configuration. Use one redirect approach, not duplicate rules.
+
+Verify both the homepage and a nested path with a query string after applying the rule. `https://www.contractormoneylab.website/tools/job-profit-calculator/?source=check` must redirect to `https://contractormoneylab.website/tools/job-profit-calculator/?source=check` with status 301; the destination must return 200. These settings require authenticated dashboard or API access and cannot be applied through a source-code deploy alone.

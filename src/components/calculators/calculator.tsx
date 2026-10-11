@@ -45,7 +45,7 @@ function initial(tool: Tool): Record<string, string> {
   }
   return values;
 }
-export function Calculator({ tool }: { tool: Tool }) {
+export function Calculator({ tool, presets = calculatorPresets[tool.slug] ?? [] }: { tool: Tool; presets?: CalculatorPreset[] }) {
   const [raw, setRaw] = useState(() => initial(tool)),
     [mode, setMode] = useState("0"),
     [months, setMonths] = useState(6),
@@ -240,7 +240,7 @@ export function Calculator({ tool }: { tool: Tool }) {
           >
             Default example
           </button>
-          {(calculatorPresets[tool.slug] ?? []).map((preset) => (
+          {presets.map((preset) => (
             <button
               key={preset.label}
               className={presetName === preset.label ? "active" : ""}

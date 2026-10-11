@@ -570,6 +570,7 @@ p {
   gap: 18px;
 }
 .tool-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   background: white;
@@ -583,6 +584,16 @@ p {
 .tool-card:hover {
   border-color: #ae735b;
   transform: translateY(-2px);
+}
+.tool-card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+}
+.tool-card-link:focus-visible::after {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
 }
 .tool-top {
   display: flex;
@@ -2143,4 +2154,48 @@ thead {
   tr {
     break-inside: avoid;
   }
+}
+
+/* Guides remain in the exported HTML, including collapsed FAQ answers. */
+.guide-layout { grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr); gap: clamp(24px, 5vw, 64px); }
+.guide-body { min-width: 0; }
+.guide-body p { font-size: 16px; line-height: 1.8; }
+.guide-body h3 { font-size: 22px; margin-top: 36px; scroll-margin-top: 100px; }
+.guide-body a, .guide-faq p a { text-decoration: underline; text-underline-offset: 3px; color: #963e20; }
+.guide-body .guide-source { font-size: 13px; }
+.guide-layout aside ol { padding-left: 20px; margin-bottom: 28px; }
+.guide-layout aside li { padding: 0 0 12px 4px; font-size: 13px; line-height: 1.6; }
+.guide-layout aside a:hover { text-decoration: underline; }
+.guide-layout aside .text-link { display: block; }
+.guide-faq { margin-top: 36px; }
+.guide-faq details { border-top: 1px solid var(--border); padding: 18px 0; }
+.guide-faq details:last-child { border-bottom: 1px solid var(--border); }
+.guide-faq summary { cursor: pointer; font-weight: 650; font-size: 16px; line-height: 1.6; }
+.guide-faq details p { margin: 15px 0 0; }
+.guide-table { margin-top: 30px; }
+.guide-table table { width: 100%; border-collapse: collapse; font-size: 14px; white-space: normal; }
+.guide-table caption { text-align: left; font-weight: 650; padding-bottom: 12px; }
+.guide-table th, .guide-table td { text-align: left; padding: 12px; border-bottom: 1px solid var(--border); }
+.guide-table thead { background: #eeeee7; }
+.trade-directory { margin-bottom: 55px; }
+.trade-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.trade-grid article { background: white; padding: 24px; border: 1px solid var(--border); border-radius: 6px; }
+.trade-grid a { font-weight: 650; font-size: 18px; line-height: 1.4; }
+.trade-grid a:hover { color: #963e20; }
+.trade-grid p { font-size: 14px; line-height: 1.75; margin: 12px 0 0; }
+.home-guide h2 { margin: 10px 0 20px; }
+.home-guide-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 38px 64px; margin-top: 38px; }
+.home-guide-grid h3 { font-size: 21px; margin: 12px 0; }
+.home-guide-grid p, .home-faq p { font-size: 15px; line-height: 1.8; }
+.home-faq { max-width: 850px; margin-top: 55px; }
+.example-confirmation { padding: 18px; margin-bottom: 20px; background: #fff8eb; border: 1px solid #d5b57d; border-radius: 6px; }
+.example-confirmation p { margin-bottom: 14px; }
+@media (max-width: 800px) {
+  .guide-layout, .trade-grid { grid-template-columns: 1fr; }
+  .guide-layout aside { order: -1; }
+  .home-guide-grid { gap: 30px; }
+}
+@media (max-width: 560px) {
+  .home-guide-grid { grid-template-columns: 1fr; }
+  .guide-body h3 { font-size: 20px; }
 }

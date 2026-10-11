@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ArrowRight, Check, ArrowUpRight } from "lucide-react";
 import { ToolGrid } from "@/components/tool-grid";
 import { EditorialPhoto } from "@/components/editorial-photo";
+import { HomeGuide } from "@/components/home-guide";
+import { TradeLinks } from "@/components/trade-links";
 export default function Home() {
   return (
     <>
@@ -136,13 +138,15 @@ export default function Home() {
                 <h3>{title}</h3>
                 <p>{body}</p>
                 <Link className="text-link" href={"/tools/" + slug}>
-                  Work through the numbers <ArrowUpRight size={16} />
+                  {slug === "contractor-cash-flow-calculator" ? "Check payment timing" : slug === "markup-vs-margin-calculator" ? "See markup vs. margin" : "Review the job costs"} <ArrowUpRight size={16} />
                 </Link>
               </article>
             ))}
           </div>
         </div>
       </section>
+      <div className="container"><TradeLinks /></div>
+      <HomeGuide />
       <section className="container methodology-callout">
         <div>
           <span className="eyebrow">TRANSPARENT BY DESIGN</span>
