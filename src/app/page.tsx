@@ -85,10 +85,11 @@ export default function Home() {
       </div>
       <section className="container section"><div className="section-heading"><div><span className="eyebrow">MEASURE IT. SEE IT. PRICE IT.</span><h2>Your takeoff, brought to life.</h2><p>Live architectural diagrams turn dimensions into materials and a bid you can explain.</p></div><Link className="text-link" href="/field-lab/">Explore the visual field lab →</Link></div><FieldToolGrid featured /></section>
       <section className="container section">
-        <div className="section-heading toolbox-heading">
+        <div className="toolbox-heading">
           <div>
             <span className="eyebrow">YOUR FINANCIAL TOOLBOX</span>
             <h2>Measure twice. Bid once.</h2>
+            <p>Turn your job costs into a clear price, a healthier margin, and a plan for getting paid.</p>
           </div>
           <EditorialPhoto
             photo="plans-and-tools"

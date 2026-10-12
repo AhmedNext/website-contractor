@@ -273,12 +273,45 @@ p {
   background: #465b45;
 }
 .toolbox-heading {
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  margin-bottom: 28px;
+  border-radius: 12px;
+  background: #252c28;
+  color: #f8f7f3;
+}
+.toolbox-heading > div {
+  align-self: center;
+  padding: 40px 44px;
+}
+.toolbox-heading .eyebrow {
+  color: #dfb68b;
+}
+.toolbox-heading h2 {
+  margin: 16px 0;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -1px;
+}
+.toolbox-heading p {
+  max-width: 380px;
+  color: #d0d5cf;
+  font-size: 14px;
+  line-height: 1.7;
 }
 .toolbox-photo {
-  width: 280px;
-  height: 120px;
-  border-radius: 6px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 270px;
+}
+.toolbox-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #252c28, transparent 35%);
+  pointer-events: none;
 }
 .fundamentals-heading,
 .tools-intro {
@@ -350,8 +383,18 @@ p {
     width: 32px;
     height: 32px;
   }
+  .toolbox-heading {
+    grid-template-columns: 1fr;
+  }
+  .toolbox-heading > div {
+    padding: 28px 24px;
+  }
   .toolbox-photo {
-    display: none;
+    height: 210px;
+    min-height: 0;
+  }
+  .toolbox-photo::after {
+    background: linear-gradient(180deg, #252c28, transparent 35%);
   }
   .fundamentals-heading,
   .tools-intro {
