@@ -90,6 +90,9 @@ export default function RootLayout({
               estimates, not accounting or tax advice.
             </div>
           </footer>
+          <div className="pdf-branding-footer">
+            Generated with ContractorMoneyLab.website — Free Estimating &amp; Job Costing Tools for Trade Pros
+          </div>
         </TooltipProvider>
       </body>
     </html>
