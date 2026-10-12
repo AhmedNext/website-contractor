@@ -1,0 +1,203 @@
+{
+  "checked": "2026-10-12",
+  "note": "HTTP requests with a Googlebot user-agent verify responses, not real Google crawler identity or Google indexing.",
+  "sitemapUrls": 28,
+  "results": [
+    {
+      "url": "https://contractormoneylab.website/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/field-lab/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/field-lab/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/job-cost-tracker/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/job-cost-tracker/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/change-order-builder/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/change-order-builder/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/about/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/about/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/methodology/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/methodology/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/privacy-policy/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/privacy-policy/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/terms/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/terms/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/contact/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/contact/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/job-profit-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/job-profit-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/contractor-break-even-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/contractor-break-even-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/contractor-cash-flow-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/contractor-cash-flow-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/labor-rate-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/labor-rate-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/markup-vs-margin-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/markup-vs-margin-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/change-order-profit-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/change-order-profit-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/roofing-job-profit-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/roofing-job-profit-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/plumbing-labor-rate-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/plumbing-labor-rate-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/remodeling-change-order-template/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/remodeling-change-order-template/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/concrete-slab-footing-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/concrete-slab-footing-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/roofing-pitch-shingle-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/roofing-pitch-shingle-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/wall-stud-framing-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/wall-stud-framing-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/drywall-sheet-mud-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/drywall-sheet-mud-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/room-square-footage-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/room-square-footage-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/aggregate-dirt-tonnage-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/aggregate-dirt-tonnage-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/construction-cost-per-square-foot-calculator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/construction-cost-per-square-foot-calculator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/contractor-estimate-invoice-generator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/contractor-estimate-invoice-generator/",
+      "blocked": false,
+      "h1": 1
+    },
+    {
+      "url": "https://contractormoneylab.website/tools/subcontractor-lien-waiver-generator/",
+      "status": 200,
+      "canonical": "https://contractormoneylab.website/tools/subcontractor-lien-waiver-generator/",
+      "blocked": false,
+      "h1": 1
+    }
+  ]
+}

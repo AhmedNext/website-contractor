@@ -56,7 +56,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
     <h1>{tool.name}</h1>
     <p className="intro no-print">{tool.description}</p>
     {template ? <ToolWorkbench key={slug} mode="change" example={trade?.changeExample} /> : <ToolWorkbench key={slug} mode="financial" tool={tool} presets={trade?.presets} />}
-    <ToolGuideContent tool={tool} guide={guide} template={template} />
+    <ToolGuideContent tool={tool} guide={guide} template={template} exampleSlug={slug} />
     {trade && <p className="no-print"><Link className="text-link" href={`/tools/${trade.baseSlug}/`}>Read the general {tools.find((item) => item.slug === trade.baseSlug)?.short.toLowerCase()} guide →</Link></p>}
     <div className="no-print"><AdSlot /></div>
     <TradeLinks currentSlug={slug} />

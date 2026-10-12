@@ -1,8 +1,9 @@
 import Link from "next/link";
 import type { Tool } from "@/content/tools";
 import type { ToolGuide } from "@/content/tool-guides";
+import { PracticalExample } from "@/components/practical-example";
 
-export function ToolGuideContent({ tool, guide, template = false, introduction, privacy }: { tool: Tool; guide: ToolGuide; template?: boolean; introduction?: string; privacy?: string }) {
+export function ToolGuideContent({ tool, guide, template = false, introduction, privacy, exampleSlug }: { tool: Tool; guide: ToolGuide; template?: boolean; introduction?: string; privacy?: string; exampleSlug?: string }) {
   return (
     <section className="editorial guide-layout no-print" aria-labelledby="guide-title">
       <article className="guide-body">
@@ -12,6 +13,7 @@ export function ToolGuideContent({ tool, guide, template = false, introduction, 
         <h3>Formula and worked example</h3>
         <p className="formula-box">{template ? "Proposed change price = added cost ÷ (1 − target margin ÷ 100)." : tool.formula}</p>
         <p>{tool.example}</p>
+        <PracticalExample slug={exampleSlug ?? tool.slug} />
         {guide.sections.map((section) => (
           <section key={section.id} aria-labelledby={section.id}>
             <h3 id={section.id}>{section.title}</h3>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChangeBuilder } from "@/components/job-workspace/change-builder";
 import { meta } from "@/lib/seo";
+import { PracticalExample } from "@/components/practical-example";
 export const metadata = meta(
   "Contractor Change Order Builder",
   "Create a printable change order with added scope, costs, target margin, schedule impact, and an approval record.",
@@ -21,6 +22,7 @@ export default function Page() {
         schedule impact, and an approval record.
       </p>
       <ChangeBuilder />
+      <PracticalExample slug="change-order-builder" />
       <section className="editorial no-print">
         <h2>How to use this tool</h2>
         <p>

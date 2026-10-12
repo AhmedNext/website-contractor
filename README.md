@@ -58,7 +58,7 @@ The build uses the supported webpack path. Its automatic postbuild step supplies
 Copy `.env.example` to `.env.local` if needed. Never commit secrets.
 
 - `SITE_URL` defaults to `https://contractormoneylab.website`. It controls canonical URLs, sitemap, social metadata, and structured data.
-- `NEXT_PUBLIC_CONTACT_EMAIL` is optional until a real operator address is supplied. Email setup is deferred.
+- Public support email is maintained in `src/content/contact.ts`, using the owner's monitored inbox. Contact, Terms and Privacy share this address.
 - Advertising is disabled. Before enabling it, configure the actual publisher and slot, connect `AdSlot.consentGranted` to an appropriate consent platform, and update the privacy policy. The enable flag alone does not grant consent.
 - Analytics is optional and not active. Configure it through the hosting provider if needed and update the privacy policy.
 
@@ -98,3 +98,9 @@ The lien studio stores one local draft under `cml-lien-v1`. California forms fol
 Each new route has a roughly 1,100-word server-rendered guide and visible FAQ content. WebApplication, HowTo, FAQPage and breadcrumb JSON-LD describe the rendered functionality. Google has deprecated HowTo rich results and restricts FAQ rich results; this markup does not promise eligibility, ranking, traffic or revenue. The cost-spectrum defaults and material densities are clearly labeled illustrative assumptions. Bag yields cite the selected QUIKRETE product.
 
 No new runtime dependency, backend, email collection, WebGL engine or account flow was added. All tools retain static export compatibility. The existing financial tools remain available. A failed local draft parse preserves the original stored value until the user edits or explicitly restores a backup.
+
+## October 2026 quality review
+
+The public contact inbox is maintained in `src/content/contact.ts`. Contact, Terms and Privacy contain visitor-facing text, and all 20 tools include a hypothetical worked comparison in `src/content/practical-examples.ts`. Document input errors explain when the previous value is retained.
+
+See [quality-review.md](docs/quality-review.md) for formula, mobile, persistence, backup and crawl-accessibility results, including the unverified native PDF preview. [seo-keyword-plan.md](docs/seo-keyword-plan.md) contains the per-tool U.S. search targeting and competition review; missing provider results are unknown demand. Actual Google indexing must be checked in Search Console.

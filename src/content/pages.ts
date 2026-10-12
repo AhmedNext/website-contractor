@@ -17,7 +17,7 @@ export const pages: Record<
       ],
       [
         "How the site is supported",
-        "The intended business model is display advertising. Advertising is disabled in this implementation until publisher approval, configuration, and appropriate consent are in place. The tools have no paid tier.",
+        "The tools are free and have no paid tier. Display advertising may support the site in the future. No advertising or analytics scripts are currently active, and using the tools does not require an email address.",
       ],
     ],
   },
@@ -83,11 +83,11 @@ export const pages: Record<
       ],
       [
         "Future advertising and analytics",
-        "Advertising and analytics are disabled by default. Before activating them, the operator must update this policy to identify actual vendors, purposes, retention, consent choices, and applicable rights. Personalized Google ads require a properly configured consent platform where applicable. No consent to tracking is implied by using a calculator.",
+        "No advertising or analytics scripts are currently active. If that changes, this policy will describe the services used and any available privacy choices. Using a calculator does not give consent to future tracking.",
       ],
       [
         "Contact and policy changes",
-        "If you use the operator’s configured email link, your email provider and the recipient process that message. Avoid sending private job or employee data. Deployment documentation requires a real contact address before public launch. This policy must be reviewed when the site’s actual data practices change.",
+        "When you email support, your email provider and our inbox provider process the message. We use your message and reply address to answer your request. Do not send private customer, employee or contract records. You can ask us to delete support correspondence; your own email provider may keep a separate copy. Updates to our data practices will be reflected on this page.",
       ],
     ],
   },
@@ -97,6 +97,10 @@ export const pages: Record<
       "Terms and limitations for the free Contractor Money Lab planning tools.",
     sections: [
       [
+        "Who these terms cover",
+        "These terms apply to Contractor Money Lab's free calculators, visual takeoffs, job workspace and document studios. They describe the scope of the tools and your responsibilities when using their results. No subscription or account is required.",
+      ],
+      [
         "Educational planning tools",
         "Calculations are estimates based on your inputs and stated assumptions. They do not constitute accounting, tax, legal, lending, or investment advice. Use your contracts and qualified advisers to verify decisions.",
       ],
@@ -105,12 +109,28 @@ export const pages: Record<
         "You are responsible for input accuracy, expense allocation, contract interpretation, and checking the result against your business circumstances. No revenue, profitability, payment timing, or financing outcome is guaranteed.",
       ],
       [
+        "Material quantities and local prices",
+        "Diagrams are estimating sketches, not engineered plans or installation instructions. Verify measurements, product coverage, supplier density, construction requirements and purchase quantities before ordering. Cost ranges and examples are hypothetical; they are not current regional price surveys. The tools do not inspect a jobsite or certify compliance.",
+      ],
+      [
+        "Documents and approvals",
+        "You may print, download and use the estimates, invoices and change orders you prepare. You remain responsible for their scope, taxes, payment terms and approval process. Lien-waiver and notice drafts need review for the actual state, payment status and contract. The site does not collect signatures, verify cleared funds, serve notices, file documents or calculate legal deadlines.",
+      ],
+      [
+        "Saved work and backups",
+        "Saved drafts stay in this browser on this device. Clearing storage, changing browser or using another domain can make them unavailable. Download backups before replacing important work. The site does not provide cloud recovery or accounting records. Read the Privacy policy for details about local storage and support correspondence.",
+      ],
+      [
         "Availability and permitted use",
         "The site is provided as available. Use it lawfully, without interfering with availability or attempting to manipulate future advertising impressions or clicks. All tools remain available without registration.",
       ],
       [
         "Limitations",
-        "To the extent permitted by applicable law, the operator does not warrant that estimates are complete or suitable for a particular purpose. These terms do not override rights that cannot lawfully be excluded. The operator should obtain a legal review appropriate to its actual jurisdiction before public launch.",
+        "The tools are provided as available, without a guarantee that an estimate is complete, accurate for your project or suitable for a particular purpose. To the extent permitted by applicable law, the operator is not responsible for losses caused by relying on unverified inputs or results. Nothing in these terms excludes rights or liability that applicable law does not allow to be excluded.",
+      ],
+      [
+        "Corrections, updates and questions",
+        "Report unexpected results using a hypothetical example so we can investigate. Features, formulas and these terms may change as the site improves. The revision date on this page identifies the current text. Contact support with questions about the site or these terms.",
       ],
     ],
   },
@@ -124,8 +144,12 @@ export const pages: Record<
         "Include the calculator name, a non-sensitive hypothetical example, expected result, and the result you saw. Never send employee records, customer details, or confidential contract documents.",
       ],
       [
-        "Contact availability",
-        "A public contact address is not yet configured. The site operator must set NEXT_PUBLIC_CONTACT_EMAIL before launch. No address has been invented for this project.",
+        "Support and feedback",
+        "Email us about calculation errors, accessibility problems, broken links, privacy requests or suggestions. Tell us which page you used, your browser and device, and the steps that reproduce the issue. We cannot promise a response time or provide project-specific legal, tax or engineering advice.",
+      ],
+      [
+        "A useful bug report",
+        "For example: Concrete Slab & Footing Calculator; solid slab; 24 ft × 24 ft × 6 in; zero order allowance; expected net volume 10.67 cubic yards. Describe what appeared instead and include a screenshot with any private details removed. This lets us reproduce the calculation without needing your actual job records.",
       ],
     ],
   },

@@ -189,17 +189,12 @@ export function ChangeBuilder({ example }: { example?: Partial<Change> } = {}) {
           ))}
           <label>
             Target profit margin (%)
-            <input
-              type="number"
-              min="0"
-              max="95"
-              step="0.1"
+            <MoneyInput
+              label="Target profit margin (%)"
+              max={95}
+              step={0.1}
               value={data.margin}
-              onChange={(e) => {
-                const margin = e.target.valueAsNumber;
-                if (Number.isFinite(margin) && margin >= 0 && margin <= 95)
-                  update({ margin });
-              }}
+              onChange={(margin) => update({ margin })}
             />
           </label>
         </div>

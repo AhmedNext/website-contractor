@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { JobTracker } from "@/components/job-workspace/job-tracker";
 import { meta } from "@/lib/seo";
+import { PracticalExample } from "@/components/practical-example";
 export const metadata = meta(
   "Job Cost Tracker: Estimate vs. Actual",
   "Track estimated and actual contractor job costs, see profit differences, and export a job report without an account.",
@@ -21,6 +22,7 @@ export default function Page() {
         and export a job report without an account.
       </p>
       <JobTracker />
+      <PracticalExample slug="job-cost-tracker" />
       <section className="editorial no-print">
         <h2>How to use this tool</h2>
         <p>
