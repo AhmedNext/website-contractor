@@ -204,18 +204,28 @@ p {
 }
 .hero-visual {
   position: relative;
-  padding-bottom: 35px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #252c28;
+  box-shadow: 0 20px 50px #252c2812;
   min-width: 0;
 }
 .hero-visual > .editorial-photo {
-  height: 490px;
-  border-radius: 10px;
+  height: 540px;
+}
+.hero-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #252c2810 45%, #252c28e6);
+  pointer-events: none;
 }
 .hero-visual img {
   object-position: 49% center;
 }
 .photo-kicker {
   position: absolute;
+  z-index: 1;
   top: 20px;
   left: 20px;
   padding: 8px 11px;
@@ -223,20 +233,25 @@ p {
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 1.6px;
+  border-radius: 50px;
+  backdrop-filter: blur(8px);
 }
 .hero-profit-note {
   position: absolute;
-  bottom: 0;
-  left: -24px;
+  z-index: 1;
+  bottom: 20px;
+  left: 20px;
   right: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
   padding: 22px;
-  background: #28382d;
+  background: #252c28ed;
+  border: 1px solid #ffffff24;
+  backdrop-filter: blur(12px);
   color: #fff;
-  border-radius: 6px;
+  border-radius: 12px;
   box-shadow: 0 10px 30px #28382d18;
 }
 .hero-profit-note .eyebrow {
@@ -317,12 +332,26 @@ p {
 .tools-intro {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
-  gap: 45px;
+  gap: 0;
   align-items: center;
+  overflow: hidden;
+  border-radius: 16px;
+}
+.fundamentals-heading {
+  background: #fff;
+  border: 1px solid var(--border);
+}
+.fundamentals-heading > div,
+.tools-intro > div {
+  padding: 40px;
+}
+.fundamentals-heading h2 {
+  font-size: clamp(28px, 3vw, 38px);
+  line-height: 1.2;
 }
 .fundamentals-heading > .editorial-photo {
-  height: 240px;
-  border-radius: 6px;
+  height: 100%;
+  min-height: 350px;
 }
 .fundamentals-heading p {
   margin-top: 20px;
@@ -331,23 +360,46 @@ p {
 }
 .tools-intro {
   margin-bottom: 38px;
+  background: #252c28;
+  color: #f8f7f3;
+}
+.tools-intro .eyebrow {
+  color: #dfb68b;
 }
 .tools-intro h1 {
-  font-size: clamp(32px, 4vw, 50px);
+  font-size: clamp(30px, 3.5vw, 46px);
   margin-top: 15px;
 }
 .tools-intro .intro {
   margin-bottom: 0;
+  color: #d0d5cf;
 }
 .tools-intro > .editorial-photo {
-  height: 280px;
-  border-radius: 8px;
+  position: relative;
+  height: 100%;
+  min-height: 360px;
+}
+.tools-intro > .editorial-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #252c28, transparent 30%);
+  pointer-events: none;
+}
+.about-story {
+  margin: 36px 0;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #252c28;
+}
+.about-story figcaption {
+  padding: 20px 26px;
+  color: #e1e5de;
+  font-size: 13px;
+  line-height: 1.6;
 }
 .about-photo {
-  height: 480px;
-  border-radius: 8px;
-  margin: 32px 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  height: 420px;
 }
 .about-photo img,
 .fundamentals-heading img {
@@ -355,25 +407,24 @@ p {
 }
 @media (max-width: 900px) {
   .hero-visual > .editorial-photo {
-    height: 400px;
+    height: 480px;
   }
   .hero-profit-note {
-    left: -10px;
-    right: 10px;
     padding: 18px;
   }
-  .fundamentals-heading,
-  .tools-intro {
-    gap: 25px;
+  .fundamentals-heading > div,
+  .tools-intro > div {
+    padding: 30px;
   }
 }
 @media (max-width: 700px) {
   .hero-visual > .editorial-photo {
-    height: 350px;
+    height: 430px;
   }
   .hero-profit-note {
     left: 10px;
     right: 10px;
+    bottom: 10px;
     padding: 18px;
   }
   .hero-profit-note strong {
@@ -400,12 +451,20 @@ p {
   .tools-intro {
     grid-template-columns: 1fr;
   }
+  .fundamentals-heading > div,
+  .tools-intro > div {
+    padding: 28px 24px;
+  }
   .fundamentals-heading > .editorial-photo,
   .tools-intro > .editorial-photo {
-    height: 220px;
+    height: 250px;
+    min-height: 0;
+  }
+  .tools-intro > .editorial-photo::after {
+    background: linear-gradient(180deg, #252c28, transparent 30%);
   }
   .about-photo {
-    height: 300px;
+    height: 280px;
   }
 }
 .hero h1 {
