@@ -5,6 +5,7 @@ import { ToolGrid } from "@/components/tool-grid";
 import { EditorialPhoto } from "@/components/editorial-photo";
 import { HomeGuide } from "@/components/home-guide";
 import { TradeLinks } from "@/components/trade-links";
+import { FieldToolGrid } from "@/components/field-lab/field-tool-grid";
 export default function Home() {
   return (
     <>
@@ -77,11 +78,12 @@ export default function Home() {
         <div className="container">
           <span>BUILT FOR U.S. CONTRACTORS</span>
           <span>
-            Six practical tools. One clearer picture of your business.
+            Visual quantities. Practical pricing. One clearer picture.
           </span>
           <span>NO ACCOUNTS. NO PAYWALLS.</span>
         </div>
       </div>
+      <section className="container section"><div className="section-heading"><div><span className="eyebrow">MEASURE IT. SEE IT. PRICE IT.</span><h2>Your takeoff, brought to life.</h2><p>Live architectural diagrams turn dimensions into materials and a bid you can explain.</p></div><Link className="text-link" href="/field-lab/">Explore the visual field lab →</Link></div><FieldToolGrid featured /></section>
       <section className="container section">
         <div className="section-heading toolbox-heading">
           <div>

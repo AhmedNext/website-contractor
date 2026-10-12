@@ -9,7 +9,7 @@ export const pages: Record<
     sections: [
       [
         "Our purpose",
-        "Contractor Money Lab helps small U.S. construction businesses examine pricing, overhead, profitability, and payment timing before committing to work. All six calculators are free and require no account.",
+        "Contractor Money Lab helps small U.S. construction businesses measure quantities, prepare bids, examine profitability and plan payment timing. Financial calculators, visual takeoffs and private document studios are free and require no account.",
       ],
       [
         "Useful over complicated",
@@ -55,8 +55,16 @@ export const pages: Record<
         "Revised revenue includes the entered change amount; revised costs include direct, overhead, delay, and expected contingency expense. Incremental profit measures the change alone. Proposed changes remain scenarios until approved. Maximum total additional cost equals change revenue; remaining capacity deducts modeled added costs.",
       ],
       [
+        "Visual takeoffs",
+        "Dimensions use feet and inches, areas use square feet, and volumes use cubic yards. One cubic yard is 27 cubic feet; one U.S. short ton is 2,000 pounds. Net geometry is separate from order allowance. Bag yield, package coverage, bulk density and loose-to-placed factors are explicit product or user assumptions. Simplified diagrams are not structural drawings, installation specifications or optimized cutting plans. Cost-spectrum ranges are editable hypothetical scenarios, not verified regional benchmarks.",
+      ],
+      [
+        "Customer documents",
+        "Estimate and invoice line amounts round to cents before subtotaling. Discount applies proportionally across all lines, tax applies to marked discounted taxable lines, and retainage applies to the discounted pre-tax subtotal. Current due is total after tax less retainage; retained money remains part of the total. Lien-document language uses linked official state sources, while General drafts require local review. The studios do not send, sign, serve, file or verify payments.",
+      ],
+      [
         "Precision and limits",
-        "All formulas use JavaScript floating-point numbers without intermediate rounding. Display uses U.S. dollars and percentages. This is estimating software, not a bookkeeping ledger. Inputs are limited to one trillion to prevent unrealistic magnitude and nonfinite results. End-of-month forecasts do not capture every daily cash shortage. Taxes and financing are excluded unless entered.",
+        "Financial calculator formulas use JavaScript floating-point numbers without intermediate rounding. Purchase counts round upward to whole units, while customer-document amounts round to cents at stated stages. Display uses U.S. dollars and percentages. This is estimating software, not a bookkeeping ledger. Tool-specific input bounds help avoid unrealistic magnitude and nonfinite results. End-of-month forecasts do not capture every daily cash shortage. Taxes and financing are excluded unless entered.",
       ],
     ],
   },
@@ -67,11 +75,11 @@ export const pages: Record<
     sections: [
       [
         "Financial inputs",
-        "Calculator values remain in your browser’s page memory. They are not submitted to a backend, stored in a database, or serialized into shared URLs. Reloading clears the original calculator inputs. The job tracker and change-order builder save the records you enter in this browser’s local storage and offer downloadable backups. Those records are not sent to a backend. No account is required.",
+        "Calculator and takeoff values remain in your browser’s page memory. They are not submitted to a backend, stored in a database, or serialized into shared URLs. Reloading clears those inputs. The job tracker, change-order builder, estimate/invoice studio and lien-document studio save local browser drafts and offer downloadable backups. Preparing an estimate line from a takeoff creates a local sessionStorage transfer which you explicitly add to the document. No account is required.",
       ],
       [
         "Cookies and storage",
-        "The delivered site uses no analytics or advertising scripts and stores job tracker records and a change-order draft in localStorage on your device. Clearing browser storage deletes these records; use downloaded backups to keep or move them. Shared devices can expose saved records to other people using the same browser. Your hosting provider may process standard request data such as IP address and browser information to deliver and secure the site.",
+        "The delivered site uses no analytics or advertising scripts. Saved jobs and document drafts use localStorage on your device; pending takeoff transfers use sessionStorage. Clearing browser storage deletes these records, and closing a browser session may clear transfers. Use downloaded backups to keep or move drafts. Shared devices can expose saved details to other people using the same browser. Your hosting provider may process standard request data such as IP address and browser information to deliver and secure the site.",
       ],
       [
         "Future advertising and analytics",

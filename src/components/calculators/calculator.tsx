@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useHydrated } from "@/components/use-hydrated";
 import dynamic from "next/dynamic";
 import { RotateCcw, Info, Bookmark, Copy } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -46,6 +47,7 @@ function initial(tool: Tool): Record<string, string> {
   return values;
 }
 export function Calculator({ tool, presets = calculatorPresets[tool.slug] ?? [] }: { tool: Tool; presets?: CalculatorPreset[] }) {
+  const ready = useHydrated();
   const [raw, setRaw] = useState(() => initial(tool)),
     [mode, setMode] = useState("0"),
     [months, setMonths] = useState(6),
@@ -229,7 +231,8 @@ export function Calculator({ tool, presets = calculatorPresets[tool.slug] ?? [] 
     </div>
   );
   return (
-    <>
+    <fieldset className="interactive-tool-frame" disabled={!ready} aria-busy={!ready}>
+      <legend className="sr-only">{tool.name} inputs and results</legend>
       <div className="calculator-toolbar">
         <div className="example-presets">
           <span>TRY AN EXAMPLE</span>
@@ -590,6 +593,6 @@ export function Calculator({ tool, presets = calculatorPresets[tool.slug] ?? [] 
           )}
         </div>
       </div>
-    </>
+    </fieldset>
   );
 }

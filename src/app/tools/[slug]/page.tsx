@@ -4,22 +4,25 @@ import { notFound } from "next/navigation";
 import { tools } from "@/content/tools";
 import { toolGuides } from "@/content/tool-guides";
 import { calculatorForTrade, tradeTools } from "@/content/trade-tools";
-import { Calculator } from "@/components/calculators/calculator";
-import { ChangeBuilder } from "@/components/job-workspace/change-builder";
+import { ToolWorkbench } from "@/components/tool-workbench";
 import { ToolGuideContent } from "@/components/tool-guide";
 import { TradeLinks } from "@/components/trade-links";
 import { meta, siteUrl } from "@/lib/seo";
+import { fieldTools } from "@/content/field-tools";
+import { FieldToolPage } from "@/components/field-lab/field-tool-page";
 
 export function generateStaticParams() {
-  return [...tools, ...tradeTools].map((tool) => ({ slug: tool.slug }));
+  return [...tools, ...tradeTools, ...fieldTools].map((tool) => ({ slug: tool.slug }));
 }
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const tool = [...tools, ...tradeTools].find((tool) => tool.slug === slug);
+  const tool = [...tools, ...tradeTools, ...fieldTools].find((tool) => tool.slug === slug);
   return tool ? meta(tool.name, tool.description, `/tools/${slug}/`) : {};
 }
 export default async function ToolPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  const fieldTool = fieldTools.find((tool) => tool.slug === slug);
+  if (fieldTool) return <FieldToolPage tool={fieldTool} />;
   const trade = tradeTools.find((tool) => tool.slug === slug);
   const tool = trade ? calculatorForTrade(trade) : tools.find((tool) => tool.slug === slug);
   if (!tool) notFound();
@@ -52,7 +55,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
     <span className="eyebrow no-print">{tool.category} / FREE CONTRACTOR TOOL</span>
     <h1>{tool.name}</h1>
     <p className="intro no-print">{tool.description}</p>
-    {template ? <ChangeBuilder example={trade?.changeExample} /> : <Calculator key={slug} tool={tool} presets={trade?.presets} />}
+    {template ? <ToolWorkbench key={slug} mode="change" example={trade?.changeExample} /> : <ToolWorkbench key={slug} mode="financial" tool={tool} presets={trade?.presets} />}
     <ToolGuideContent tool={tool} guide={guide} template={template} />
     {trade && <p className="no-print"><Link className="text-link" href={`/tools/${trade.baseSlug}/`}>Read the general {tools.find((item) => item.slug === trade.baseSlug)?.short.toLowerCase()} guide →</Link></p>}
     <div className="no-print"><AdSlot /></div>

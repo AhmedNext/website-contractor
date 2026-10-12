@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 const links = [
   ["Home", "/"],
   ["Calculators", "/tools"],
+  ["Takeoff lab", "/field-lab"],
   ["Methodology", "/methodology"],
   ["About", "/about"],
 ];

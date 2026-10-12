@@ -2,13 +2,13 @@ import Link from "next/link";
 import type { Tool } from "@/content/tools";
 import type { ToolGuide } from "@/content/tool-guides";
 
-export function ToolGuideContent({ tool, guide, template = false }: { tool: Tool; guide: ToolGuide; template?: boolean }) {
+export function ToolGuideContent({ tool, guide, template = false, introduction, privacy }: { tool: Tool; guide: ToolGuide; template?: boolean; introduction?: string; privacy?: string }) {
   return (
     <section className="editorial guide-layout no-print" aria-labelledby="guide-title">
       <article className="guide-body">
         <span className="eyebrow">WORK THROUGH YOUR ESTIMATE</span>
         <h2 id="guide-title">{guide.title}</h2>
-        <p>{template ? "Use this free remodeling change-order template to document added work, calculate its proposed price and print a customer copy. It shares the change-order builder's single saved browser draft." : `${tool.audience} Replace the hypothetical inputs with your own costs and contract figures. Results update as you type; use the chart and pinned comparison to examine a revised estimate.`}</p>
+        <p>{introduction ?? (template ? "Use this free remodeling change-order template to document added work, calculate its proposed price and print a customer copy. It shares the change-order builder's single saved browser draft." : `${tool.audience} Replace the hypothetical inputs with your own costs and contract figures. Results update as you type; use the chart and pinned comparison to examine a revised estimate.`)}</p>
         <h3>Formula and worked example</h3>
         <p className="formula-box">{template ? "Proposed change price = added cost ÷ (1 − target margin ÷ 100)." : tool.formula}</p>
         <p>{tool.example}</p>
@@ -41,7 +41,7 @@ export function ToolGuideContent({ tool, guide, template = false }: { tool: Tool
         </nav>
         <h3>Assumptions & limitations</h3>
         <p>{template ? "This template records the details you supply. It does not send documents, verify authorization, collect a signature or determine contract compliance. Follow your actual agreement's approval process." : tool.limitations}</p>
-        <p>{template ? "One draft is saved locally in this browser. Download a backup before replacing it. Other devices and domains have separate storage." : "Inputs and pinned estimates stay in page memory and clear on reload. Dollar amounts are rounded only for display. Undefined ratios appear as unavailable."}</p>
+        <p>{privacy ?? (template ? "One draft is saved locally in this browser. Download a backup before replacing it. Other devices and domains have separate storage." : "Inputs and pinned estimates stay in page memory and clear on reload. Dollar amounts are rounded only for display. Undefined ratios appear as unavailable.")}</p>
         <Link className="text-link" href="/methodology/">Formulas and methodology →</Link>
         <h3>Keep the estimate useful</h3>
         <p>All examples are hypothetical. Compare the result with actual costs, capacity and collection timing before making a business decision.</p>

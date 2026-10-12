@@ -13,11 +13,11 @@ const geist = localFont({
 });
 export const metadata: Metadata = {
   ...meta(
-    "Contractor Money Lab | Know Your Numbers Before You Bid",
-    "Free financial calculators for U.S. contractors: job profit, cash flow, break-even, labor rates, markup and change orders.",
+    "Construction Calculators & Estimates | Contractor Money Lab",
+    "Free visual construction calculators for concrete, roofing, framing and more. Price jobs, forecast cash flow and print private estimates without signing up.",
   ),
   title: {
-    default: "Contractor Money Lab | Know Your Numbers Before You Bid",
+    default: "Construction Calculators & Estimates | Contractor Money Lab",
     template: "%s | Contractor Money Lab",
   },
 };

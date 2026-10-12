@@ -1,8 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { ZodType } from "zod";
 export function useLocalDraft<T>(key: string, schema: ZodType<T>, initial: T) {
-  const [data, setData] = useState<T>(initial);
+  const [data, setStoredData] = useState<T>(initial);
+  const [canSave, setCanSave] = useState(false);
+  const setData = useCallback((value: T) => {
+    setStoredData(value);
+    setCanSave(true);
+  }, []);
   const [ready, setReady] = useState(false);
   const [message, setMessage] = useState("Loading saved work…");
   // Hydrate browser-only saved records after static HTML hydration; storage errors are user-visible.
@@ -10,7 +15,8 @@ export function useLocalDraft<T>(key: string, schema: ZodType<T>, initial: T) {
   useEffect(() => {
     try {
       const saved = localStorage.getItem(key);
-      if (saved) setData(schema.parse(JSON.parse(saved)));
+      if (saved) setStoredData(schema.parse(JSON.parse(saved)));
+      setCanSave(true);
       setMessage(
         saved
           ? "Saved work restored on this device."
@@ -18,13 +24,13 @@ export function useLocalDraft<T>(key: string, schema: ZodType<T>, initial: T) {
       );
     } catch {
       setMessage(
-        "Saved work could not be loaded. Import a backup or start again.",
+        "Saved work could not be loaded. Original storage is preserved until you edit or restore a backup.",
       );
     }
     setReady(true);
   }, [key, schema]);
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || !canSave) return;
     try {
       localStorage.setItem(key, JSON.stringify(data));
     } catch {
@@ -32,7 +38,7 @@ export function useLocalDraft<T>(key: string, schema: ZodType<T>, initial: T) {
         "Browser storage is unavailable or full. Download a backup before leaving.",
       );
     }
-  }, [data, ready, key]);
+  }, [data, ready, canSave, key]);
   /* eslint-enable react-hooks/set-state-in-effect */
   return { data, setData, ready, message, setMessage };
 }
