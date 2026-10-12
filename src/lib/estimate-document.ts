@@ -1,5 +1,5 @@
 import { z } from "zod";
-const amount=z.number().finite().min(0).max(1e9);
+const amount=z.number().finite().min(0).max(1e12);
 export const estimateLineSchema=z.object({description:z.string().max(500),quantity:amount,unit:z.string().max(30),rate:amount,taxable:z.boolean()});
 export const estimateSchema=z.object({version:z.literal(1),type:z.enum(["Estimate","Invoice"]),number:z.string().max(80),date:z.string().max(30),due:z.string().max(30),contractor:z.string().max(500),client:z.string().max(500),project:z.string().max(300),terms:z.string().max(3000),notes:z.string().max(3000),lines:z.array(estimateLineSchema).min(1).max(30),tax:z.number().finite().min(0).max(30),discount:z.number().finite().min(0).max(100),retainage:z.number().finite().min(0).max(100)});
 export type EstimateDocument=z.infer<typeof estimateSchema>;
